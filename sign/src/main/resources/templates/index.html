@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sign</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap-datepicker.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap-datepicker.standalone.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap-datepicker3.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap-datepicker3.standalone.min.css}">
+
+
+</head>
+<body>
+
+
+
+	<div id="calendar"></div>
+	<button onclick="getDays()" class="btn btn-primary">Enviar</button>
+	<button onclick="postDays()" class="btn btn-primary">Guardar</button>
+
+
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/locale/bootstrap-datepicker.es.min.js}"></script>
+	<script type="text/javascript">
+$('#calendar').datepicker({
+    language: "es",
+    multidate: true,
+    multidateSeparator: ",",
+    daysOfWeekDisabled: "0,6",
+    todayHighlight: true
+});
+function getDays(){
+	var days = [];
+	$.ajax({
+		  url: "http://localhost:8080/days",
+		  type: "GET", 
+		  success: function(response) {
+			  console.log(response);
+			  for (var i = 0; i < response.length; i++) {
+				  days[i] = new Date(response[i]);
+				}
+			$('#calendar').datepicker('setDates', days);
+		  },
+		  error: function(xhr) {
+		    console.log('Error');
+		  }
+		});
+
+//console.log($('#calendar').datepicker('getDates'));	
+}
+
+function postDays(){
+	var dates = $('#calendar').datepicker('getDates');
+	var days = [];
+	 for (var i = 0; i < dates.length; i++) {
+		   days[i] = dates[i].toString();
+		}
+	 console.log(days);
+	$.ajax({
+		   url:  "http://localhost:8080/days",
+		   type: "POST",
+           contentType: "application/json; charset=utf-8",
+		   data: JSON.stringify(days),
+		   success: function(msg){
+		    console.log('OK');
+		   },
+		   error: function(xhr, status, error){
+		    console.log('Error 1' );
+		   }
+		});
+
+//console.log($('#calendar').datepicker('getDates'));	
+//http://localhost:8080/h2-console
+//https://www.springboottutorial.com/spring-boot-and-h2-in-memory-database
+}
+</script>
+
+</body>
+</html>
