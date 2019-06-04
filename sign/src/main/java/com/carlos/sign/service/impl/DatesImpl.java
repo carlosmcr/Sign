@@ -33,10 +33,7 @@ public class DatesImpl implements DatesService {
 
 	@Override
 	public void write(String fileName, String[] dates) {
-		//this.datesRepository.deleteAll();
-		GregorianCalendar calendar1 = new GregorianCalendar(2019,5,5);
-		
-		System.out.println(this.datesRepository.findByCalendarAndState(calendar1, "PAUSE")); 
+		this.datesRepository.deleteAll();
 		for (String date : dates) {
 			String day = date.substring(0,3);
 			String month = date.substring(4,7);
@@ -90,7 +87,8 @@ public class DatesImpl implements DatesService {
 			GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(year), numberMonth, Integer.parseInt(numberDay), Integer.parseInt(hour), Integer.parseInt(minute), Integer.parseInt(second));
 			Dates d = new Dates();
 			d.setState(state);
-			d.setCalendar(calendar);
+			d.setCalendar(calendar);		
+			d.setDayOfyear(calendar.get(Calendar.DAY_OF_YEAR));
 			this.datesRepository.save(d);
 			
 		}

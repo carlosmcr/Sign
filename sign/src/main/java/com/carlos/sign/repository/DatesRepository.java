@@ -11,5 +11,5 @@ import com.carlos.sign.model.Dates;
 @Repository
 public interface DatesRepository extends JpaRepository<Dates, Integer>{
 
-	public Dates findByCalendarAndState(GregorianCalendar calendar, String state);
+	public Dates findBydayOfyearAndState(int day, String state);
 }

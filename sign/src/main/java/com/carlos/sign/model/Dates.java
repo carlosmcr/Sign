@@ -15,13 +15,15 @@ public class Dates {
 	private GregorianCalendar calendar;
 	private String state;
 	private boolean expired;
+	private int dayOfyear;
 	
-	public Dates(int idDate, GregorianCalendar calendar, String state, boolean expired) {
+	public Dates(int idDate, GregorianCalendar calendar, String state, boolean expired, int dayOfyear) {
 		super();
 		this.idDate = idDate;
 		this.calendar = calendar;
 		this.state = state;
 		this.expired = false;
+		this.dayOfyear = dayOfyear;
 	}
 	
 	public Dates() {
@@ -59,10 +61,21 @@ public class Dates {
 		this.expired = expired;
 	}
 
+	public int getDayOfyear() {
+		return dayOfyear;
+	}
+
+	public void setDayOfyear(int dayOfyear) {
+		this.dayOfyear = dayOfyear;
+	}
+
 	@Override
 	public String toString() {
-		return "Dates [idDate=" + idDate + ", calendar=" + calendar + ", state=" + state + ", expired=" + expired + "]";
+		return "Dates [idDate=" + idDate + ", calendar=" + calendar + ", state=" + state + ", expired=" + expired
+				+ ", dayOfyear=" + dayOfyear + "]";
 	}
+
+	
 
 
 
