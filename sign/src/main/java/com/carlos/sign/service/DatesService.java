@@ -13,7 +13,10 @@ public interface DatesService {
 	
 	public String[] read(String fileName);
 	
-	public void write(String fileName, String[] dates);
+	public void updateAll( String[] dates);
+	
+	public void updateOne(String[] days);
+
 
 
 

@@ -12,4 +12,8 @@ import com.carlos.sign.model.Dates;
 public interface DatesRepository extends JpaRepository<Dates, Integer>{
 
 	public Dates findBydayOfyearAndState(int day, String state);
+	
+	public List<Dates> findBydayOfyear(int day);
+
+	
 }

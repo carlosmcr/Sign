@@ -25,10 +25,15 @@ public class DateController {
 	}
 	
 	@RequestMapping(value = "/days", method = RequestMethod.POST)
-	public ResponseEntity<Void> postAllDates(@RequestBody String[] days) {
-		datesService.write("days", days);
+	public ResponseEntity<Void> saveAllDates(@RequestBody String[] days) {
+		datesService.updateAll(days);
 		return new ResponseEntity<Void>( HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/day", method = RequestMethod.POST)
+	public ResponseEntity<Void> saveOneDate(@RequestBody String[] days) {
+		datesService.updateOne(days);
+		return new ResponseEntity<Void>( HttpStatus.OK);
+	}
 
 }
