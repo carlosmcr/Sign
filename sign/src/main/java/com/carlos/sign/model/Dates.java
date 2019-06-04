@@ -14,12 +14,14 @@ public class Dates {
 	private int idDate;
 	private GregorianCalendar calendar;
 	private String state;
+	private boolean expired;
 	
-	public Dates(int idDate, GregorianCalendar calendar, String state) {
+	public Dates(int idDate, GregorianCalendar calendar, String state, boolean expired) {
 		super();
 		this.idDate = idDate;
 		this.calendar = calendar;
 		this.state = state;
+		this.expired = false;
 	}
 	
 	public Dates() {
@@ -49,10 +51,19 @@ public class Dates {
 		this.state = state;
 	}
 
+	public boolean isExpired() {
+		return expired;
+	}
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
+
 	@Override
 	public String toString() {
-		return "Dates [idDate=" + idDate + ", calendar=" + calendar + ", state=" + state + "]";
+		return "Dates [idDate=" + idDate + ", calendar=" + calendar + ", state=" + state + ", expired=" + expired + "]";
 	}
+
 
 
 	
