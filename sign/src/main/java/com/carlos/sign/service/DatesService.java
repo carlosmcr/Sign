@@ -15,7 +15,6 @@ public interface DatesService {
 	
 	public void updateAll( String[] dates);
 	
-	public void updateOne(String[] days);
 
 
 

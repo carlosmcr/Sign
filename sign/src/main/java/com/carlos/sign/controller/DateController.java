@@ -30,10 +30,6 @@ public class DateController {
 		return new ResponseEntity<Void>( HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/day", method = RequestMethod.POST)
-	public ResponseEntity<Void> saveOneDate(@RequestBody String[] days) {
-		datesService.updateOne(days);
-		return new ResponseEntity<Void>( HttpStatus.OK);
-	}
+
 
 }
