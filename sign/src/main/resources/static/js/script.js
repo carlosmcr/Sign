@@ -78,7 +78,7 @@ function getList() {
 		type : "GET",
 		success : function(response) {
 			console.log(response);
-			var dates = response;
+			addRow(response);
 			
 		},
 		error : function(xhr) {
@@ -86,5 +86,33 @@ function getList() {
 		}
 	});
 
-	// console.log($('#calendar').datepicker('getDates'));
 }
+
+function addRow(list) {
+	$("#tbody").empty();
+	  var table = document.getElementById('table').getElementsByTagName('tbody')[0];
+	  
+	  for (var i = 0; i < list.length; i++) {
+		  
+		  var newRow   = table.insertRow(table.rows.length);
+
+		  var cell1  = newRow.insertCell(0);
+		  var cell2  = newRow.insertCell(1);
+		  var cell3  = newRow.insertCell(2);
+		  var cell4  = newRow.insertCell(3);
+		  
+		  var day = list[i].calendar.substring(8,10);
+		  var month = list[i].calendar.substring(5,7);
+		  var year = list[i].calendar.substring(2,4);
+		  var hour = list[i].calendar.substring(11,16);
+		  
+		  cell1.appendChild(document.createTextNode(list[i].idDate));
+		  cell2.appendChild(document.createTextNode(day +"/"+ month +"/"+ year +" "+ hour));
+		  cell3.appendChild(document.createTextNode(list[i].dayOfyear));
+		  cell4.appendChild(document.createTextNode(list[i].state));
+
+	  }
+
+
+
+	}

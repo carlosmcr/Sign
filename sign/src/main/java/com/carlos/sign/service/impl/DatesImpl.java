@@ -5,7 +5,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.persistence.criteria.Order;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.carlos.sign.model.Dates;
@@ -49,6 +52,7 @@ public class DatesImpl implements DatesService {
 
 	@Override
 	public void updateAll(String[] dates) {
+		int j = 0;
 
 		for (int i = 0; i < dates.length; i++) {
 			dayOfyear = dates[i].substring(dates[i].indexOf("_") + 1);
@@ -68,12 +72,14 @@ public class DatesImpl implements DatesService {
 					Integer.parseInt(second));
 
 			List<Dates> dateList = this.datesRepository.findBydayOfyear(Integer.parseInt(dayOfyear));
-
+			
 			if (dateList.size() == 4) {
-				int id = dateList.get(i).getIdDate();
+				int id = dateList.get(j).getIdDate();
 				Dates d = this.datesRepository.findById(id).orElse(null);
 				d.setCalendar(calendar);
 				this.datesRepository.save(d);
+				if(j == 4)
+					j = 0;
 			} else {
 				Dates d = new Dates();
 				d.setState(state);
@@ -88,8 +94,7 @@ public class DatesImpl implements DatesService {
 
 	@Override
 	public List<Dates> getlist() {
-		return this.datesRepository.findAll();		
-		//https://stackoverflow.com/questions/44225978/passing-listobject-to-thymeleaf-with-spring-boot
+		return this.datesRepository.findAllBydayOfyear();		
 	}
 
 }

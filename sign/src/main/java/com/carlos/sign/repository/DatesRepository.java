@@ -17,6 +17,8 @@ public interface DatesRepository extends JpaRepository<Dates, Integer>{
 	
 	@Query(value = "SELECT * FROM DATES WHERE STATE LIKE 'START'", nativeQuery=true)
 	public List<Dates>  findDistinctdayOfyear();
-
+	
+	@Query(value = "SELECT * FROM DATES ORDER BY DAY_OFYEAR ASC", nativeQuery=true)
+	public List<Dates>  findAllBydayOfyear();
 	
 }
