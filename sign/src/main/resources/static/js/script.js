@@ -22,7 +22,7 @@ function getDays() {
 			console.log('Error');
 		}
 	});
-
+	getList();
 	// console.log($('#calendar').datepicker('getDates'));
 }
 
@@ -69,4 +69,22 @@ function getDayOfYear(dates, i) {
 	var oneDay = 1000 * 60 * 60 * 24;
 	var dayNumber = Math.floor(diff / oneDay);
 	return dayNumber;
+}
+
+function getList() {
+	var days = [];
+	$.ajax({
+		url : "http://localhost:8080/list",
+		type : "GET",
+		success : function(response) {
+			console.log(response);
+			var dates = response;
+			
+		},
+		error : function(xhr) {
+			console.log('Error');
+		}
+	});
+
+	// console.log($('#calendar').datepicker('getDates'));
 }

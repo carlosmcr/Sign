@@ -37,26 +37,49 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon1">Pausa      </span>
 				</div>
-				<input type="time" id="pause" min="7:00" max="22:00" class="form-control">
+				<input type="time" id="pause" min="7:00" max="22:00"
+					class="form-control">
 			</div>
 			<div class="input-group mb-3 col-md-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon1">Fin pausa</span>
 				</div>
-				<input type="time" id="stopPause" min="7:00" max="22:00" class="form-control">
+				<input type="time" id="stopPause" min="7:00" max="22:00"
+					class="form-control">
 			</div>
 			<div class="input-group mb-3 col-md-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon1">Salida      </span>
 				</div>
-				<input type="time" id="end" min="7:00" max="22:00" class="form-control">
+				<input type="time" id="end" min="7:00" max="22:00"
+					class="form-control">
 			</div>
 		</div>
 		<button onclick="saveAllDays()" class="btn btn-primary">Guardar</button>
 		<button onclick="getDays()" class="btn btn-primary">Enviar</button>
 
-	</div>
 
+		<table class="table table-striped table-sm my-3">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Fecha</th>
+					<th scope="col">Dia del año</th>
+					<th scope="col">Estado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="date : ${dates}">
+					<th scope="row"><span th:text="${date.idDate}"></th>
+					<td><span th:text="${date.calendar}"></td>
+					<td><span th:text="${date.dayOfyear}"></td>
+					<td>@<span th:text="${date.state}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
 
 
 	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -73,6 +96,8 @@
 	<script type="text/javascript"
 		th:src="@{/locale/bootstrap-datepicker.es.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+	
+	
 
 </body>
 </html>

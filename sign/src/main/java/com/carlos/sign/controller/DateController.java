@@ -1,5 +1,7 @@
 package com.carlos.sign.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +21,18 @@ public class DateController {
 
 	@RequestMapping(value = "/days", method = RequestMethod.GET)
 	public ResponseEntity<String[]> getAllDates() {
-
-		String days[] = datesService.read("days");
-		return new ResponseEntity<String[]>(days, HttpStatus.OK);
+		return new ResponseEntity<String[]>(datesService.getAll(), HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/days", method = RequestMethod.POST)
 	public ResponseEntity<Void> saveAllDates(@RequestBody String[] days) {
 		datesService.updateAll(days);
-		return new ResponseEntity<Void>( HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-
-
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ResponseEntity<List<Dates>> getList() {
+		return new ResponseEntity<List<Dates>>(datesService.getlist(), HttpStatus.OK);
+	}
 
 }

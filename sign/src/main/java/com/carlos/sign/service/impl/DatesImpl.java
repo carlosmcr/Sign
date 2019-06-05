@@ -1,16 +1,9 @@
 package com.carlos.sign.service.impl;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +34,7 @@ public class DatesImpl implements DatesService {
 	int numberMonth = 0;
 
 	@Override
-	public String[] read(String fileName) {
+	public String[] getAll() {
 		List<Dates> dates = this.datesRepository.findDistinctdayOfyear();
 		String calendar[] = new String[dates.size()];
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy, MM , dd");
@@ -91,6 +84,12 @@ public class DatesImpl implements DatesService {
 
 		}
 
+	}
+
+	@Override
+	public List<Dates> getlist() {
+		return this.datesRepository.findAll();		
+		//https://stackoverflow.com/questions/44225978/passing-listobject-to-thymeleaf-with-spring-boot
 	}
 
 }
