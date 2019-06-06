@@ -35,7 +35,7 @@ public class DateController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<List<Dates>> getList() {
-		this.emailService.sendSimpleMessage("carlos.alcalde.benitez@gmail.com", "hola", "texto");
+//		this.emailService.sendSimpleMessage("carlos.alcalde.benitez@gmail.com", "hola", "texto");
 		return new ResponseEntity<List<Dates>>(datesService.getlist(), HttpStatus.OK);
 	}
 
