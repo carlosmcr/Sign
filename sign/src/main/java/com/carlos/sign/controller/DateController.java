@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carlos.sign.model.Dates;
 import com.carlos.sign.service.DatesService;
+import com.carlos.sign.service.EmailService;
 
 @RestController
 public class DateController {
 
 	@Autowired
 	DatesService datesService;
+	@Autowired
+	EmailService emailService;
 
 	@RequestMapping(value = "/days", method = RequestMethod.GET)
 	public ResponseEntity<String[]> getAllDates() {
@@ -32,6 +35,7 @@ public class DateController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ResponseEntity<List<Dates>> getList() {
+		this.emailService.sendSimpleMessage("carlos.alcalde.benitez@gmail.com", "hola", "texto");
 		return new ResponseEntity<List<Dates>>(datesService.getlist(), HttpStatus.OK);
 	}
 
